@@ -25,7 +25,7 @@ void AddReadyQueue(struct T_info *new_thread)
         //insert  first high queue element
         if(high_ready_queue->thread_info == NULL)
         {
-            //high_ready_queue = malloc(sizeof(struct queue));
+            
             high_ready_queue->thread_info = new_thread;
             high_ready_queue->next = malloc(sizeof(struct queue));
             high_ready_queue->next->thread_info = NULL;
@@ -51,7 +51,7 @@ void AddReadyQueue(struct T_info *new_thread)
         //insert first queue element
         if(medium_ready_queue->thread_info == NULL)
         {
-            //medium_ready_queue = malloc(sizeof(struct queue));
+            
             medium_ready_queue->thread_info = new_thread;
             medium_ready_queue->next = malloc(sizeof(struct queue));
             medium_ready_queue->next->thread_info = NULL;
@@ -75,7 +75,7 @@ void AddReadyQueue(struct T_info *new_thread)
         //insert  first high queue element
         if(low_ready_queue->thread_info == NULL)
         {
-            //low_ready_queue = malloc(sizeof(struct queue));
+            
             low_ready_queue->thread_info = new_thread;
             low_ready_queue->next = malloc(sizeof(struct queue));
             low_ready_queue->next->thread_info = NULL;
@@ -176,7 +176,7 @@ int OS2021_ThreadCreate(char *job_name, char *p_function, char *priority, int ca
         return -1;
 
 
-    //setcontext(&(new_thread->thread));
+    
     return TID;
 
 
@@ -199,7 +199,7 @@ void OS2021_ThreadCancel(char *job_name)
             current_thread = current_thread->next;
         }
 
-        //previous_thread->next = current_thread->next;
+        
 
     }
     //select removed thread from medium ready queue
@@ -213,7 +213,7 @@ void OS2021_ThreadCancel(char *job_name)
             previous_thread = current_thread;
             current_thread = current_thread->next;
         }
-        //previous_thread->next = current_thread->next;
+        
 
 
     }
@@ -229,10 +229,6 @@ void OS2021_ThreadCancel(char *job_name)
             current_thread = current_thread->next;
 
         }
-
-
-        //previous_thread->next = malloc(sizeof(struct queue));
-        //previous_thread->next = current_thread->next;
 
     }
 
@@ -345,7 +341,7 @@ void OS2021_ThreadWaitEvent(int event_id)
 
 
 
-    //if((strcmp(running_thread_info->priority, "L")) == 0)
+   
 
 }
 
@@ -442,47 +438,11 @@ void OS2021_ThreadSetEvent(int event_id)
         }
     }
 
-    /*if((event_medium_queue->thread_info) != NULL){ this lien
-
-        current_thread = event_medium_queue;
-        current_thread->thread_info->state = "READY";
-
-        printf("\n%s changes the status of %s to READY \n", running_thread_info->job_name, current_thread->thread_info->job_name);
-        //Add the element to ready queue
-        AddReadyQueue(current_thread->thread_info);
-
-        //move the second element to the first position
-        current_thread = current_thread->next;
-
-        event_medium_queue->thread_info = current_thread->thread_info;
-        event_medium_queue->next = current_thread->next;
-
-     }*///this lien
-
-    //if((strcmp(running_thread_info->priority, "H")) == 0)
-    /*if((strcmp(running_thread_info->priority, "M")) == 0){
-
-       current_thread = event_medium_queue;
-       //find the final element of event queue
-       while(current_thread->thread_info != NULL){
-           current_thread = current_thread->next;
-       }
-       current_thread->thread_info = running_thread_info;
-       current_thread->next = NULL;
-
-       running_queue->thread_info = NULL;
-
-    }*/
-    //if((strcmp(running_thread_info->priority, "L")) == 0)
+    
 }
 
 void OS2021_ThreadWaitTime(int msec)
 {
-
-
-
-    //waiting_time = msec * 10;
-    //current_time = total_time;
 
     //total waiting time
     running_queue->thread_info->waiting_queue_target_time = msec * 10;
@@ -505,7 +465,7 @@ void OS2021_ThreadWaitTime(int msec)
 
 
 
-    //waiting_queue->thread_info = running_queue->thread_info;
+    
     current_thread = waiting_queue;
     while(current_thread->thread_info != NULL)
     {
@@ -577,9 +537,6 @@ void ParseJson()
 
     char *job_name, *p_function, *priority, *cancel_mode_name;
     int cancel_mode, create_context = 0;
-
-    //json_object *parsed_json;
-    //json_object *Threads;
 
     fp = fopen("init_threads.json","r");
     fread(buffer, 1024, 1, fp);
@@ -1115,13 +1072,6 @@ void check()
     //release waiting queue element
 
 
-
-    /*if((total_time - current_time) > waiting_time && waiting_queue->thread_info != NULL){
-
-        AddReadyQueue(waiting_queue->thread_info);//segmentation
-        waiting_queue->thread_info = NULL;
-    }*/
-
 }
 
 
@@ -1219,7 +1169,7 @@ void StartSchedulingSimulation()
 
 
     CreateContext(&dispatch_context, NULL, &scheduler);
-    //setcontext(&dispatch_context);
+    
     high_ready_queue = malloc(sizeof(struct queue));
     high_ready_queue->thread_info = NULL;
     high_ready_queue->next = NULL;
@@ -1257,17 +1207,6 @@ void StartSchedulingSimulation()
     waiting_queue->thread_info = NULL;
     waiting_queue->next = NULL;
 
-    /*previous_thread = malloc(sizeof(struct queue));
-    previous_thread->thread_info = NULL;
-    previous_thread->next = NULL;
-
-    current_thread = malloc(sizeof(struct queue));
-    current_thread->thread_info = NULL;
-    current_thread->next = NULL;
-
-    terminate_next_thread = malloc(sizeof(struct queue));
-    terminate_next_thread->thread_info = NULL;
-    terminate_next_thread->next = NULL;*/
     ParseJson();
     signal_process();
     SetTimer();
